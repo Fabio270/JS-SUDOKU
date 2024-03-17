@@ -51,6 +51,12 @@ function setGame() {
                 tile.innerText = board[r][c];
                 tile.classList.add("tile-start");
             }
+            if(r == 2 || r == 5){
+                tile.classList.add("horizontal-line");
+            }
+            if(c == 2 || c == 5){
+                tile.classList.add("vertical-line");
+            }
             tile.classList.add("tile");
             tile.addEventListener("click", selectTile);
             document.getElementById("board").append(tile);
@@ -71,6 +77,17 @@ function selectTile(){
         if(this.innerText != ""){
             return;
         }
-        this.innerText = numSelected.id
+
+        let coords = this.id.split("-");
+        let r = parseInt(coords[0]);
+        let c = parseInt(coords[1]);
+
+        if(solution[r][c] == numSelected.id){
+            this.innerText = numSelected.id;
+        } 
+        else {
+            errors += 1;
+            document.getElementById("errors").innerText = errors;
+        }
     }
 }
